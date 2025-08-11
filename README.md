@@ -40,7 +40,7 @@
 -  //SPDX-License-Identifier: MIT
 -     pragma solidity ^0.8.0;
        contract FabricChannelCreator {
-         event ChannelRequested(string channelName, stringorg1, string org2);
+         event ChannelRequested(string channelName, string org1, string org2);
           function requestChannelCreation(
          string memory channelName,
           string memory org1,
