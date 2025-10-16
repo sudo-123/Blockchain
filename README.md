@@ -1,5 +1,6 @@
 # Blockchain
-# DAG.Sol
+
+**Practical 1. Implement The DAG.Sol**
 ```
   //SPDX-License-Identifier: MIT
      pragma solidity ^0.8.0;     
@@ -38,7 +39,8 @@
         }
       }
 ```
-# Hyper Ledger.Sol
+
+**Practical 2. Hyper Ledger.Sol**
 ```
   //SPDX-License-Identifier: MIT
      pragma solidity ^0.8.0;
@@ -53,69 +55,8 @@
          }
       }
 ```
-# Fact_no.Sol    
-```
-  //SPDX-License-Identifier: MIT
-     pragma solidity ^0.8.0;
-       contract Factorial {
-       function getFactorial(uint n) public pure returns(uint) {
-          uint fact = 1;
-          for(uint i = 1; i <= n; i++) {
-              fact *= i;
-          }
-          return fact;
-         }
-        }
-```
-# Multipleaddtion.Sol
-```
-  //SPDX-License-Identifier: MIT
-     pragma solidity ^0.8.0;
-      contract AddFourNumbers {
-          function add(uint a, uint b, uint c, uint d) public pure returns(uint) {
-              uint sum = a + b + c +d;
-               return sum;
-          }
-        }
-```
-#  Natural.Sol
-```
-  //SPDX-License-Identifier: MIT
-     pragma solidity ^0.8.0;
-       contract NaturalNumbers {
-            function getNaturalNumbers(uint n) public pure returns(uint[] memory) {
-                uint[] memory numbers = new uint[](n);
-                for(uint i = 0; i < n; i++) {
-                    numbers[i] = i + 1;
-                }
-                return numbers;
-             }
-         }
-```
-# Sum_two_no.Sol
-```
-   //SPDX-License-Identifier: MIT
-     pragma solidity ^0.8.0;
-       contract AddTwoNumbers {    
-        uint public number1;
-        uint public number2;
-        uint public sum;
-    
-       function setNumbers(uint _num1, uint _num2) public {
-            number1 = _num1;
-            number2 = _num2;
-        }
-    
-        function calculateSum() public {
-            sum = number1 + number2;
-        }
-    
-          function getSum() public view returns (uint) {
-            return sum;
-          }
-       }
-```
-# Smart contract creation in channel
+
+**Practical 3. Smart contract creation in channel**
 ```
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
@@ -214,3 +155,98 @@ contract SimpleChannel {
 }
 ```
 
+**Practical 4. Balance transfer between blocks**
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract BalanceTransfer {
+    mapping(address => uint256) public balances;
+
+    function deposit() public payable {
+        balances[msg.sender] += msg.value;
+    }
+
+    function transfer(address payable to, uint256 amount) public {
+        require(balances[msg.sender] >= amount, "Insufficient balance");
+        balances[msg.sender] -= amount;
+        balances[to] += amount;
+    }
+
+    function withdraw(uint256 amount) public {
+        require(balances[msg.sender] >= amount, "Not enough balance");
+        balances[msg.sender] -= amount;
+        payable(msg.sender).transfer(amount);
+    }
+
+    function getContractBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
+}
+```
+
+**Fact_no.Sol**    
+```
+  //SPDX-License-Identifier: MIT
+     pragma solidity ^0.8.0;
+       contract Factorial {
+       function getFactorial(uint n) public pure returns(uint) {
+          uint fact = 1;
+          for(uint i = 1; i <= n; i++) {
+              fact *= i;
+          }
+          return fact;
+         }
+        }
+```
+
+**Multipleaddtion.Sol**
+```
+  //SPDX-License-Identifier: MIT
+     pragma solidity ^0.8.0;
+      contract AddFourNumbers {
+          function add(uint a, uint b, uint c, uint d) public pure returns(uint) {
+              uint sum = a + b + c +d;
+               return sum;
+          }
+        }
+```
+
+**Natural.Sol**
+```
+  //SPDX-License-Identifier: MIT
+     pragma solidity ^0.8.0;
+       contract NaturalNumbers {
+            function getNaturalNumbers(uint n) public pure returns(uint[] memory) {
+                uint[] memory numbers = new uint[](n);
+                for(uint i = 0; i < n; i++) {
+                    numbers[i] = i + 1;
+                }
+                return numbers;
+             }
+         }
+```
+
+**Sum_two_no.Sol**
+```
+   //SPDX-License-Identifier: MIT
+     pragma solidity ^0.8.0;
+       contract AddTwoNumbers {    
+        uint public number1;
+        uint public number2;
+        uint public sum;
+    
+       function setNumbers(uint _num1, uint _num2) public {
+            number1 = _num1;
+            number2 = _num2;
+        }
+    
+        function calculateSum() public {
+            sum = number1 + number2;
+        }
+    
+          function getSum() public view returns (uint) {
+            return sum;
+          }
+       }
+```
